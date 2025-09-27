@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  overflow-x: hidden; /* ✨ no horizontal scroll */
+}
+
+
+@font-face {
+  font-family: 'Hobo';
+  src: url('/fonts/HoboStd.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+/* Optional: cartoon themed scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #001d3d;
+}
+::-webkit-scrollbar-thumb {
+  background: #caf0f8;
+  border: 2px solid #000000;
+  border-radius: 10px;
+}
+
+
+
+.liquid-glass-text {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+  
+  background: linear-gradient(
+    135deg,
+    #132a13,
+    #31572c,
+    #4f772d,
+    rgba(255, 255, 255, 0.4)
+  );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* subtle shadows give 3D glassy feel */
+  text-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(255, 255, 255, 0.25);
+
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35));
+}
+
+/* shimmering liquid shine effect */
+.liquid-glass-text::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    #caf0f8cc 50%,
+    transparent 100%
+  );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: shine 6s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0%   { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Hide scrollbar but keep scroll working ✅ */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE + Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.hero-image {
+  max-width: 100%;   /* controls how big the image is */
+  height: auto;     /* keep proportions */
+  margin: 100px;      /* ✅ 5px margin on all sides */
+  border-radius: 12px; /* optional: rounded edges */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15); /* optional styling */
+}
+
+@keyframes floatSlow {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+@keyframes bounceSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-bounce-slow {
+  animation: bounceSlow 4s ease-in-out infinite;
+}
+
+@keyframes floatSlow {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
+.animate-float-slow {
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 18s linear infinite;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+.animate-slide-in {
+  animation: slideIn 0.4s ease-out;
+}
