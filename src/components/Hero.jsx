@@ -26,10 +26,10 @@ export default function Hero() {
             // Desktop (md+): Bigger and slightly down, positioned left.
             className="w-full max-w-sm object-contain z-20 
                        md:absolute 
-                       md:w-[850px]    // Made the logo even BIGGER
+                       md:w-[650px]    // Made the logo even BIGGER
                        md:max-w-none 
-                       md:top-[10px]   // Moved slightly down from previous -20px
-                       md:left-[-220px] // Moved further left for visual balance
+                       md:top-[-52px]   // Moved slightly down from previous -20px
+                       md:left-[-100px] // Moved further left for visual balance
                       "
           />
 
@@ -63,10 +63,10 @@ export default function Hero() {
             // Desktop (md+): Moved further right and is slightly larger.
             className="w-[90%] max-w-[400px] object-contain drop-shadow-xl z-10
                        md:w-auto md:max-w-none 
-                       md:h-[650px] lg:h-[750px] // Increased height
+                       md:h-[1000px] lg:h-[900px] // Increased height
                        md:relative 
-                       md:right-[-50px] // MOVED FURTHER RIGHT (from previous 80px)
-                       md:top-[-20px] // Moved slightly up (less than previous 50px)
+                       md:right-[-250px] // MOVED FURTHER RIGHT (from previous 80px)
+                       md:top-[32px] // Moved slightly up (less than previous 50px)
                       "
           />
         </div>
