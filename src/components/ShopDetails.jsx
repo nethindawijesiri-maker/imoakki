@@ -59,7 +59,7 @@ export default function ShopDetails() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center py-20 px-6 bg-[#fffcea] overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center py-20 px-6 bg-[#dff6ff] overflow-hidden">
       <span className="absolute top-16 left-10 text-4xl animate-bounce">{randomDoodle()}</span>
       <span className="absolute bottom-24 right-12 text-5xl animate-float-slow">{randomDoodle()}</span>
 

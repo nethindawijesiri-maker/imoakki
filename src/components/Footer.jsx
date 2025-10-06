@@ -28,6 +28,8 @@ export default function Footer() {
   };
 
   return (
+    <section 
+     style={{ backgroundColor: "#001d3d"}}>
     <motion.footer
       ref={ref}
       initial="hidden"
@@ -90,17 +92,19 @@ export default function Footer() {
       {/* Copyright */}
       <motion.p
         variants={item}
-        className="font-hobo text-[#001d3d] text-xl [text-shadow:_1px_1px_0px_#90e0ef] relative z-10"
+        className="font-hobo text-[#001d3d] md:text-xl [text-shadow:_1px_1px_0px_#90e0ef] relative z-10"
       >
-        © 2025 Anvora Tech. All rights reserved. 💕
+       💕 © 2025 Anvora Tech. All rights reserved. 💕
       </motion.p>
 
       <motion.p
         variants={item}
-        className="text-sm text-[#001d3d] font-medium mt-2 italic relative z-10"
+        className="text-[11px] text-[#001d3d] font-medium mt-2 italic relative z-10 px-6"
       >
-        Crafting joy, resin dreams, and memories that sparkle ✨🌸
+        🌸Crafting joy, resin dreams, and memories that sparkle🌸
       </motion.p>
     </motion.footer>
+    </section>
   );
+  
 }

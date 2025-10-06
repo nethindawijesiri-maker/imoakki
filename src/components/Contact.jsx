@@ -102,7 +102,7 @@ export default function Contact() {
               whileHover={{ scale: 1.1, rotate: 2 }}
               whileTap={{ scale: 0.95, rotate: -1 }}
               type="submit"
-              className="font-hobo text-2xl px-10 py-4 rounded-full border-2 border-black 
+              className="font-hobo md:text-2xl px-10 py-4 rounded-full border-2 border-black 
                          text-white bg-pink-400 hover:bg-pink-500 shadow-lg 
                          hover:shadow-[0_8px_16px_rgba(242,90,143,0.5)]
                          transition-transform flex items-center gap-2"

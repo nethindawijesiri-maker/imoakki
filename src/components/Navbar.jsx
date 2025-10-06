@@ -1,11 +1,13 @@
+// 1. ADD FiMenu, FiX, and AnimatePresence to your imports
 import { useState, useEffect, useContext } from "react";
-import { FiShoppingCart } from "react-icons/fi";
+import { FiShoppingCart, FiMenu, FiX } from "react-icons/fi";
 import { ShopContext } from "../context/ShopContext";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 
 export default function Navbar({ toggleCart }) {
   const [active, setActive] = useState("Home");
+  const [isOpen, setIsOpen] = useState(false); 
   const { cart } = useContext(ShopContext);
   const location = useLocation();
 
@@ -19,7 +21,7 @@ export default function Navbar({ toggleCart }) {
 
   const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
 
-  // 🌟 Scroll Spy (skip in /shop/:id)
+  // Scroll Spy (unchanged)
   useEffect(() => {
     if (location.pathname.startsWith("/shop")) return;
 
@@ -40,19 +42,27 @@ export default function Navbar({ toggleCart }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
 
-  // ✅ ShopDetails page shows ONLY Cart
+  // Close mobile menu on route change (unchanged)
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+
+  // ShopDetails page logic (unchanged)
   if (location.pathname.startsWith("/shop/")) {
     return (
       <motion.button
         onClick={toggleCart}
-        className="fixed top-5 right-5 font-hobo flex items-center justify-center px-6 py-3 
-                   bg-[white] text-ocean-dark border-2 border-ocean-dark 
-                   rounded-full shadow-md hover:bg-ocean-aqua transition z-50"
+        className="fixed top-5 right-5 font-hobo flex items-center justify-center  
+                  px-4 py-3 text-base              /* <-- Mobile styles: small padding & text */
+                  md:px-6 md:py-5 md:text-xl           /* <-- Desktop styles: larger padding & text */
+                  bg-[white] text-ocean-dark border-2 border-ocean-dark 
+                  rounded-full shadow-md hover:bg-ocean-aqua transition z-50"
         animate={{ rotate: totalQty > 0 ? [0, -10, 10, -10, 0] : 0 }}
         transition={{ duration: 0.5 }}
         key={totalQty}
       >
-        <FiShoppingCart className="text-xl mr-2" />
+        <FiShoppingCart className="mr-2" />
         Cart
         {totalQty > 0 && (
           <span className="absolute -top-2 -right-2 bg-red-500 border-2 border-black 
@@ -65,19 +75,19 @@ export default function Navbar({ toggleCart }) {
     );
   }
 
-  // ✅ Default: Show Navbar + Cart
+  // ✅ Default: Show Responsive Navbar + Cart
   return (
     <>
-      {/* Centered nav pill */}
-      <nav className="fixed top-5 left-0 right-0 flex justify-center z-40">
-        <div className="font-hobo flex items-center space-x-8 px-10 py-3 
+      {/* 2. ADD responsive classes `hidden md:flex` to the desktop nav */}
+      <nav className="fixed top-5 left-0 right-0 z-40 hidden md:flex justify-center">
+        <div className="font-hobo flex items-center space-x-8 px-20 py-5 
                         bg-[white] text-ocean-dark border-2 border-ocean-dark 
                         rounded-full shadow-md">
           {navItems.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className={`transition-colors duration-300 ${
+              className={`text-xl transition-colors duration-300  ${
                 active === item.label
                   ? "underline underline-offset-4 text-ocean-dark"
                   : "hover:text-ocean-blue"
@@ -89,17 +99,52 @@ export default function Navbar({ toggleCart }) {
         </div>
       </nav>
 
+      {/* Mobile Hamburger Button (visible only on small screens) */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="md:hidden fixed top-5 left-5 z-50 p-3 bg-white border-2 border-ocean-dark rounded-full shadow-md"
+      >
+        {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+      </button>
+
+      {/* Mobile Menu Panel */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden fixed top-0 left-0 w-full pt-24 pb-8 bg-white/95 backdrop-blur-sm z-40 shadow-lg"
+          >
+            <div className="flex flex-col items-center space-y-6">
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)} // Close menu on click
+                  className="font-hobo text-2xl text-ocean-dark hover:text-ocean-blue"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
       {/* Independent cart pill */}
       <motion.button
         onClick={toggleCart}
-        className="fixed top-5 right-5 font-hobo flex items-center justify-center px-6 py-3 
-                   bg-[white] text-ocean-dark border-2 border-ocean-dark 
-                   rounded-full shadow-md hover:bg-ocean-aqua transition z-50"
+        className="fixed top-5 right-5 font-hobo flex items-center justify-center  
+           px-4 py-3 text-base              
+           md:px-6 md:py-5 md:text-xl           
+           bg-[white] text-ocean-dark border-2 border-ocean-dark 
+           rounded-full shadow-md hover:bg-ocean-aqua transition z-50"
         animate={{ rotate: totalQty > 0 ? [0, -10, 10, -10, 0] : 0 }}
         transition={{ duration: 0.5 }}
         key={totalQty}
       >
-        <FiShoppingCart className="text-xl mr-2" />
+        <FiShoppingCart className="mr-2" />
         Cart
         {totalQty > 0 && (
           <span className="absolute -top-2 -right-2 bg-red-500 border-2 border-black 

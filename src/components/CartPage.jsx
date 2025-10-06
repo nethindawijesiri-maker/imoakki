@@ -28,7 +28,7 @@ export default function CartPage({ closeCart }) {
       </div>
 
       {/* Cart Content */}
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-6 bg-[#dff6ff]">
         {cart.length === 0 ? (
           <p className="text-gray-600 font-hobo text-center text-lg">
             🛒 Your cart is empty 💔

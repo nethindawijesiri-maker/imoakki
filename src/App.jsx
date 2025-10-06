@@ -31,7 +31,7 @@ export default function App() {
         <motion.div
           key="loader"
           className="flex flex-col items-center justify-center h-screen bg-[#001d3d] border-4 border-black 
-                     text-[#ffffff] text-6xl md:text-8xl font-hobo drop-shadow-[3px_3px_0px_white] tracking-wider"
+                     text-[#ffffff] text-2xl md:text-6xl md:text-8xl font-hobo drop-shadow-[3px_3px_0px_white] tracking-wider"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -52,7 +52,7 @@ export default function App() {
       <BrowserRouter>
         <div
           className="font-hobo text-gray-800 relative overflow-x-hidden 
-                     bg-gradient-to-b from-[#ecf39e] via-[#4f772d] to-[#31572c]"
+                     bg-[#dff6ff]"
         >
           <CursorSplash />
           <ButterflyEffect />
